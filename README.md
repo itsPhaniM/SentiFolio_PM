@@ -16,6 +16,9 @@ py -3.12 -m venv .venv
 ```bash
 # Week 1: fetch FTSE price data -> data/raw/prices.parquet
 .venv/Scripts/python.exe -m src.ingest.prices
+
+# Week 2: fetch recent news headlines -> data/raw/news.parquet
+.venv/Scripts/python.exe -m src.ingest.news
 ```
 
 ## Project layout
@@ -26,4 +29,4 @@ data/                # raw + processed data (git-ignored)
 ```
 
 ## Status
-🚧 In development — Week 1: data ingestion.
+🚧 In development — Week 2: data ingestion (prices ✅, news headlines ✅; Reddit + historical dataset next).
