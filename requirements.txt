@@ -1,0 +1,27 @@
+# --- Data (Week 1-2) ---
+yfinance
+pandas
+pyarrow
+python-dotenv
+
+# --- Scraping / sentiment sources (Week 2) ---
+praw
+feedparser
+
+# --- Sentiment / NLP (Week 3) ---
+transformers
+torch
+
+# --- Modelling (Week 4) ---
+lightgbm
+scikit-learn
+shap
+
+# --- Portfolio + backtest (Week 5-6) ---
+PyPortfolioOpt
+vectorbt
+
+# --- App / deployment (Week 7) ---
+fastapi
+uvicorn
+streamlit
