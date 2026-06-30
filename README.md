@@ -24,6 +24,10 @@ py -3.12 -m venv .venv
 #   -> data/raw/news_history.parquet
 .venv/Scripts/python.exe -m src.ingest.news_history
 
+# Week 3: FinBERT sentiment scoring (GPU, resumable)
+#   -> data/processed/news_history_scored.parquet
+.venv/Scripts/python.exe -m src.features.sentiment
+
 # Optional: Reddit posts -> data/raw/reddit.parquet  (needs approved API creds in .env)
 .venv/Scripts/python.exe -m src.ingest.reddit
 ```
@@ -41,4 +45,4 @@ data/                # raw + processed data (git-ignored)
 ```
 
 ## Status
-🚧 In development — Week 2: data ingestion. Prices ✅ · live news ✅ · historical news via date-windowed Google News ✅ (primary sentiment) · Reddit optional/deferred. Next: data cleaning + FinBERT sentiment scoring.
+🚧 In development — Week 3. Prices ✅ · news (live + historical) ✅ · FinBERT sentiment scoring ✅ (86k headlines, GPU). Next: feature engineering (sentiment + technical indicators).
