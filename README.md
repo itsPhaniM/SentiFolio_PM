@@ -28,6 +28,9 @@ py -3.12 -m venv .venv
 #   -> data/processed/news_history_scored.parquet
 .venv/Scripts/python.exe -m src.features.sentiment
 
+# Week 3: feature engineering (technical + sentiment) -> data/processed/features.parquet
+.venv/Scripts/python.exe -m src.features.build_features
+
 # Optional: Reddit posts -> data/raw/reddit.parquet  (needs approved API creds in .env)
 .venv/Scripts/python.exe -m src.ingest.reddit
 ```
