@@ -30,6 +30,10 @@ TICKERS = {
     "BA.L": "BAE Systems",
 }
 
+# ---- Sentiment sources ----
+# UK-focused investing subreddits with enough volume to mention FTSE names.
+SUBREDDITS = ["UKInvesting", "UKStockMarket", "stocks", "investing"]
+
 # ---- Backtest window ----
 START_DATE = "2018-01-01"
 END_DATE = None  # None = up to today

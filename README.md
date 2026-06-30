@@ -17,9 +17,17 @@ py -3.12 -m venv .venv
 # Week 1: fetch FTSE price data -> data/raw/prices.parquet
 .venv/Scripts/python.exe -m src.ingest.prices
 
-# Week 2: fetch recent news headlines -> data/raw/news.parquet
+# Week 2: fetch recent news headlines -> data/raw/news.parquet  (PRIMARY sentiment source)
 .venv/Scripts/python.exe -m src.ingest.news
+
+# Optional: Reddit posts -> data/raw/reddit.parquet  (needs approved API creds in .env)
+.venv/Scripts/python.exe -m src.ingest.reddit
 ```
+
+**Sentiment source:** news headlines are the primary source (consistent with the
+literature). A Reddit scraper (`src/ingest/reddit.py`) is included but optional —
+Reddit closed self-service API access in Nov 2025, so live social-media data is scoped
+as future work pending developer approval.
 
 ## Project layout
 ```
@@ -29,4 +37,4 @@ data/                # raw + processed data (git-ignored)
 ```
 
 ## Status
-🚧 In development — Week 2: data ingestion (prices ✅, news headlines ✅; Reddit + historical dataset next).
+🚧 In development — Week 2: data ingestion. Prices ✅ · news headlines ✅ (primary sentiment) · Reddit optional/deferred · historical sentiment dataset next.
