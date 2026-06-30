@@ -1,0 +1,121 @@
+datetime,ticker,headline,sent_label,sent_score
+2020-02-15 08:00:00+00:00,RIO.L,Mataura residents urge government to act over Rio Tinto's dross - RNZ,positive,0.423929899930954
+2020-03-19 07:00:00+00:00,BP.L,Local gun shops seeing higher sales - fox23.com,positive,0.7405328154563904
+2020-04-09 07:00:00+00:00,ULVR.L,"Unilever, Reckitt Benckiser offer help through Covid-19 - Convenience & Impulse Retailing",neutral,0.3534323275089264
+2020-05-17 07:00:00+00:00,BP.L,High BP is a silent killer and mostly asymptomatic. Here’s what you need to know - The Times of India,neutral,-0.0521654412150383
+2020-05-27 07:00:00+00:00,ULVR.L,"RTD Tea Market to See Massive Growth by 2025| Unilever , Argo Tea, Sweet Leaf Tea - openPR.com",neutral,0.4504753649234772
+2020-06-16 07:00:00+00:00,RR.L,Rolls Royce Cullinan Replica Comes with All the Bells and Whistles - Man of Many,neutral,0.049616046249866486
+2020-08-13 07:00:00+00:00,HSBA.L,"Stop Arming Israel: Take Action against HSBC, Saturday 22 August - CAAT UK",neutral,-0.10733455419540405
+2020-08-14 07:00:00+00:00,NWG.L,NatWest designs new investment bank layout - Global Capital,neutral,0.08413468301296234
+2020-08-18 07:00:00+00:00,VOD.L,"Vodafone has switched 5G on in parts of Swansea, here’s where - 5G.co.uk",neutral,0.012492867186665535
+2020-09-17 07:00:00+00:00,BP.L,"An Oil Giant’s Case for Peak Demand, Even Without Climate Heroics - Bloomberg.com",neutral,0.21425998210906982
+2020-10-01 07:00:00+00:00,BA.L,U.S. Army taps BAE Systems for additional M88 recovery vehicles - The Defence Blog,positive,0.7024075388908386
+2020-10-14 07:00:00+00:00,HSBA.L,HSBC celebrates 120 years in Guernsey - channeleye.media,neutral,0.08837743103504181
+2020-12-04 08:00:00+00:00,TSCO.L,How should Tesco Clubcard shoppers use their points from January? - This is Money,neutral,-0.01659100502729416
+2020-12-10 08:00:00+00:00,SHEL.L,Female trader Stacie Pitts given top job at Royal Dutch Shell - Royal Dutch Shell Plc .com,neutral,0.03800913691520691
+2021-01-21 08:00:00+00:00,GLEN.L,Police station gets a facelift - The Citizen,positive,0.6183727979660034
+2021-01-27 08:00:00+00:00,HSBA.L,HSBC CEO defends suspension of Hong Kong activists' bank account - Yahoo Finance UK,negative,-0.8768290281295776
+2021-02-16 08:00:00+00:00,SHEL.L,UK Okpabi et al v Shell: UK Supreme Court Reaffirms Parent Companies May Owe a Duty of Care Towards Communities Impacted by their Subsidiaries in Third Countries - Opinio Juris,neutral,0.015859097242355347
+2021-02-17 08:00:00+00:00,TSCO.L,"I blind taste-tested Tesco, Lidl, Asda, Aldi and Morrisons cheddar cheese and discovered you get what you pay for - Kent Live",neutral,0.09420045465230942
+2021-05-03 07:00:00+00:00,VOD.L,Vodafone and Google Cloud to develop industry-first global data platform - Vodafone,neutral,0.35245460271835327
+2021-06-06 07:00:00+00:00,RR.L,The Rolls-Royce That Belonged To Both Princess Margaret And Burt Reynolds - Silodrome - Gasoline Culture,neutral,0.04161026328802109
+2021-06-30 07:00:00+00:00,BP.L,A diverse choice of coveralls | News | Home - BP,neutral,0.053605321794748306
+2021-07-08 07:00:00+00:00,RR.L,Rolls-Royce and Cavendish Nuclear sign delivery and manufacturing partnership agreement for SMR programme - Babcock International Group,positive,0.6779739260673523
+2021-07-22 11:20:53+00:00,VOD.L,"Vodafone Idea fundraising news: BIG BOOST! Vi gets DoT approval for MASSIVE Rs 18,000 crore FDI proposal - What shareholders should know - Zee Business",positive,0.8130025267601013
+2021-08-03 07:00:00+00:00,ULVR.L,Conditioning clothes to last longer with Comfort’s new Ultimate Care - Unilever,positive,0.5456089377403259
+2021-09-13 07:00:00+00:00,RR.L,Port Sunlight classic car show a great success - Birkenhead News,positive,0.7596095204353333
+2021-11-05 07:00:00+00:00,AZN.L,"GlaxoSmithKline's novel anemia drug succeeds where AstraZeneca-FibroGen, Akebia failed - Fierce Pharma",positive,0.8047611117362976
+2021-11-19 08:00:00+00:00,VOD.L,Hooker Otukolo upgraded to top 30 contract for 2022 - Warriors,positive,0.8407070636749268
+2021-12-16 08:00:00+00:00,SHEL.L,Core–Shell Structured Upconversion/Lead-Free Perovskite Nanoparticles for Anticounterfeiting Applications - Wiley Online Library,neutral,0.03875735402107239
+2021-12-21 08:00:00+00:00,BARC.L,Barclays in Northern Ireland takes on Lisburn Council’s banking - Belfast News Letter,neutral,0.01121501624584198
+2021-12-27 08:00:00+00:00,VOD.L,"Vodafone Idea Rs 299 Plan, Is It Worth It? - TelecomTalk",neutral,0.12321725487709045
+2022-03-09 08:00:00+00:00,BA.L,Chasing the Middle East Top Guns - Asian Military Review,neutral,0.061554450541734695
+2022-04-07 07:00:00+00:00,RIO.L,Rio hit with $106m breach of contract claim - The West Australian,negative,-0.9382697343826294
+2022-06-02 07:00:00+00:00,GSK.L,Pfizer to exit consumer health JV after demerger - Pharmaceutical Technology,neutral,-0.015569083392620087
+2022-06-06 07:00:00+00:00,SHEL.L,Engineering gold-platinum core-shell nanoparticles by self-limitation in solution - Nature,neutral,0.06239908188581467
+2022-06-20 13:13:02+00:00,SHEL.L,Interesting shells: From bizarre biology to cunning counterfeits - Natural History Museum,neutral,0.01715715602040291
+2022-07-18 07:00:00+00:00,TSCO.L,Amazon Fresh entices customers with Tesco price-match promise - The Guardian,neutral,0.2880766689777374
+2022-07-18 07:00:00+00:00,GSK.L,London's largest listing for a decade sees Haleon demerged from GSK - Sky News,neutral,-0.0017049126327037811
+2022-07-25 07:00:00+00:00,BP.L,Cambridge University set to rename BP Institute - but is it enough? - Euronews.com,neutral,0.0419764444231987
+2022-07-27 07:00:00+00:00,GSK.L,"GSK 2Q Adjusted Operating Profit, Sales Rose; Raises 2022 Outlook -- 2nd Update - WSJ",positive,0.9141016006469727
+2022-08-11 07:00:00+00:00,TSCO.L,Tesco adds first zero-emission electric lorry to delivery fleet - edie.net,neutral,0.28288534283638
+2022-09-01 07:00:00+00:00,SHEL.L,Battery made of crab shell and zinc is rechargeable and biodegradable - New Scientist,neutral,0.19803328812122345
+2022-09-22 07:00:00+00:00,TSCO.L,No time for waste as Tesco pledges to halve food waste five years early - Tesco PLC,neutral,0.1128740906715393
+2022-10-10 07:00:00+00:00,ULVR.L,Mental health matters - Hindustan Unilever Limited,neutral,-0.03960182145237923
+2022-10-14 07:00:00+00:00,BA.L,BAE Systems chosen as CLCM to support RAN’s Hobart-class destroyers - Naval Technology,neutral,0.34221044182777405
+2022-11-17 08:00:00+00:00,GSK.L,GSK severs Immatics partnership in T-cell retreat that claimed Lyell last month - Fierce Biotech,neutral,0.09420257806777954
+2022-12-26 08:00:00+00:00,RR.L,Santa Brings Cristiano Ronaldo a Rolls-Royce Dawn - bmwblog,neutral,0.0699324905872345
+2023-01-22 08:00:00+00:00,TSCO.L,"Food firms raising prices unnecessarily, Tesco's John Allan says - BBC",negative,-0.7424388527870178
+2023-02-23 08:00:00+00:00,BA.L,2022 full-year results - BAE Systems,neutral,-0.04179194197058678
+2023-03-08 08:00:00+00:00,BA.L,International Women's Day | IWD - BAE Systems,neutral,-0.0010400786995887756
+2023-03-10 08:00:00+00:00,BP.L,"Doubling of BP boss pay to £10m is a ‘kick in the teeth’, say campaigners - The Guardian",neutral,-0.0830020010471344
+2023-03-28 07:00:00+00:00,BA.L,Sceptre™ Mission planning and de-brief for the next generation - BAE Systems,neutral,0.08275030553340912
+2023-04-14 07:00:00+00:00,TSCO.L,Protecting river catchments - Tesco PLC,neutral,0.06572658568620682
+2023-04-20 07:00:00+00:00,VOD.L,Indian tycoon Birla returns to Vodafone Idea board - The Indian Express,neutral,0.06489045917987823
+2023-05-28 07:00:00+00:00,RR.L,"Rolls-Royce Electric SUV Takes a CGI Swing at Luxury High-Riders, Needs To Be Baptized Too - autoevolution",neutral,0.11342625319957733
+2023-06-07 07:00:00+00:00,ULVR.L,Unilever’s Nana Yaa Owusu-Ansah wins Ultimate Woman of the Year prize - The Business & Financial Times,positive,0.7866026163101196
+2023-06-11 07:00:00+00:00,BP.L,Man fighting for life after being dragged out of car in Enfield - London Evening Standard,neutral,-0.2142116278409958
+2023-06-11 07:00:00+00:00,BP.L,The new cafe serving up mouth-watering desserts inside a Wigan petrol station - Manchester Evening News,neutral,0.033699214458465576
+2023-06-12 07:00:00+00:00,NWG.L,"Former NatWest bank in Normanton at auction for £290,000 guide price - Derbyshire Live",neutral,-0.03401511162519455
+2023-07-01 07:00:00+00:00,SHEL.L,"London Pride: Should 'pinkwashing' organisations such as BP, Shell and the Met Police be involved? - Big Issue",neutral,-0.023027494549751282
+2023-07-09 07:00:00+00:00,RIO.L,Rio chair positive on China outlook despite economic woes - The West Australian,positive,0.894241213798523
+2023-07-21 07:00:00+00:00,GSK.L,"GSK, seeking to raise risk awareness, taps social media influencers to reach lupus community - Fierce Pharma",positive,0.5567412972450256
+2023-08-01 07:00:00+00:00,TSCO.L,Tesco signs nationwide franchise agreement with Creams Cafe - Hospitality & Catering News,positive,0.8501366376876831
+2023-09-05 07:00:00+00:00,BA.L,UK strengthens defence export ties with Poland - GOV.UK,positive,0.9205340147018433
+2023-09-18 07:00:00+00:00,SHEL.L,"Shell scraps plan to build 48 new hydrogen filling stations in California, for which it had been awarded $40.6m grant - Hydrogen Insight",negative,-0.8446016311645508
+2023-10-11 07:00:00+00:00,BA.L,BAE Systems Installed a Gun From the PzH 2000 Howitzer on the M109 Self-Propelled Artillery Unit - Defense Express,neutral,0.19359417259693146
+2023-10-12 07:00:00+00:00,RIO.L,Big Mining’s downstream steel emissions a new focus for shareholders - Institute for Energy Economics and Financial Analysis (IEEFA),neutral,0.11121784895658493
+2023-11-12 08:00:00+00:00,ULVR.L,Unilever offers access to energy-saving ice cream patents - Cooling Post,neutral,0.36574774980545044
+2023-11-13 08:00:00+00:00,BARC.L,'Barclays shut our choir bank account with little warning after 40 years': Why is it debanking small community groups? - This is Money,negative,-0.6159348487854004
+2023-11-29 08:00:00+00:00,BA.L,HENSOLDT supports BAE Systems to develop Striker® II fighter-pilot helmet for the UK Royal Air Force - hensoldt,positive,0.6109709143638611
+2023-12-12 08:00:00+00:00,HSBA.L,HSBC AM Buying Singapore’s SilkRoad Property Partners - Mingtiandi,neutral,0.10762635618448257
+2024-01-16 08:00:00+00:00,BP.L,British Museum revamp contest faces boycott over BP backing - The Architects’ Journal,negative,-0.7046568393707275
+2024-02-14 08:00:00+00:00,SHEL.L,Seatrium renews LNG carriers repair contract with GasLog and Shell - Offshore-Energy.biz,positive,0.7685813903808594
+2024-03-07 08:00:00+00:00,GLEN.L,Billionaire ex-Glencore trader inches closer to buying Greek shipping bank - TradeWinds News,neutral,0.3377280831336975
+2024-03-18 07:00:00+00:00,GLEN.L,‘Big Ben’ takes on Poms over Glencore London listing - The Australian,neutral,0.011815797537565231
+2024-04-02 07:00:00+00:00,BA.L,BAE Systems to continue US Army AMPV production - ADS Advance,neutral,0.17511703073978424
+2024-05-17 07:00:00+00:00,AZN.L,AstraZeneca Owes Pfizer $108 Million in Tagrisso Patent Loss (2) - Bloomberg Law News,negative,-0.5666691660881042
+2024-05-21 07:00:00+00:00,GSK.L,Lab at center of Zantac saga claims GSK hid drug's risks for decades - Fierce Pharma,neutral,0.24769458174705505
+2024-05-24 07:00:00+00:00,RR.L,Balfour Beatty surfaces as winner of contract to double size of Rolls-Royce submarine facility - Construction Briefing,positive,0.888866662979126
+2024-06-03 07:00:00+00:00,TSCO.L,Video shows Tesco shoppers clashing with animal rights activists in meat aisle - Kent Online,negative,-0.8265483975410461
+2024-07-28 07:00:00+00:00,BA.L,Could BAE join forces with European rivals in Tempest deal? - This is Money,neutral,0.09168688207864761
+2024-08-09 07:00:00+00:00,RIO.L,Residents of Serbia's lithium-rich region vow to block EU-backed mining - WKMG,negative,-0.6758818030357361
+2024-08-23 07:00:00+00:00,RIO.L,Decarbonising steelmaking with BioIronTM - The Australian Mining Review,neutral,0.11255504190921783
+2024-08-29 07:00:00+00:00,HSBA.L,HSBC opens 'cash pod' in Harpenden after branch closure - Herts Advertiser,neutral,0.05308167263865471
+2024-09-11 07:00:00+00:00,LLOY.L,"Lloyds, Halifax and Bank of Scotland to close 292 branches in 2024/25 – here's the full list, plus alternatives - Money Saving Expert",neutral,-0.012248262763023376
+2024-09-16 07:00:00+00:00,RR.L,"Decades of service and more than two hundred million hours: Rolls-Royce celebrates T56, AE 2100 engine milestones - Rolls-Royce plc",neutral,0.09796536713838577
+2024-10-17 07:00:00+00:00,ULVR.L,K18 on life under Unilever and global expansion plans - Cosmetics Business,neutral,0.038702599704265594
+2024-10-17 07:00:00+00:00,ULVR.L,Combining science and skincare expertise for superior underarm care - Unilever,positive,0.6071413159370422
+2024-10-25 07:00:00+00:00,RR.L,It Took Rolls-Royce Three Years To Build This One-of-One Phantom - Motor1.com,neutral,0.06097586452960968
+2024-10-29 16:37:40+00:00,BARC.L,"Quarterly spend trends: sweet treats, subscriptions and social events - Barclays Group",neutral,-0.004790179431438446
+2024-11-08 08:00:00+00:00,BP.L,"Vitol, Trafigura, BP Lead Fuel Purchases from Dangote Refinery - Dabafinance",neutral,0.11198517680168152
+2024-11-18 08:00:00+00:00,TSCO.L,Tesco ‘Range of the Year’ Winner in Free From Christmas Awards - Grocery Trader,positive,0.6592504382133484
+2024-11-20 08:00:00+00:00,SHEL.L,"Companies behind campaign to ‘end plastic waste’ produced 1,000 times more plastic than it cleaned up - Greenpeace",neutral,0.0498683787882328
+2025-01-23 08:00:00+00:00,AZN.L,AstraZeneca's $570M investment highlights Canadian life science innovation - FirstWord Pharma,neutral,0.37293148040771484
+2025-01-30 08:00:00+00:00,VOD.L,Vodafone demonstrates 'world's first' satellite video call with a standard mobile phone - Engadget,positive,0.553408145904541
+2025-02-14 08:00:00+00:00,NWG.L,"NatWest Guides for Higher Income, Profitability After Quarterly Beat - WSJ",positive,0.9022756814956665
+2025-02-22 08:00:00+00:00,VOD.L,Vodafone faces setback as Altice considers exiting fibre joint venture OXG - Broadband TV News,negative,-0.9593973159790039
+2025-03-01 08:00:00+00:00,GLEN.L,"Supported by J.P. Morgan’s “green” investment fund, a Glencore coal mine is polluting South Africans’ drinking water - Voxeurop",neutral,-0.28641441464424133
+2025-03-17 07:00:00+00:00,GSK.L,17.03.2025: GSTN issued Advisory for Biometric-Based Aadhaar Authentication and Document Verification for GST Registration Applicants of Uttar Pradesh - taxo.online,neutral,0.13912717998027802
+2025-04-15 07:00:00+00:00,AZN.L,Employee Volunteerism: Inspiring Positive Change in our Communities - AstraZeneca,positive,0.6878113150596619
+2025-05-15 07:00:00+00:00,GLEN.L,"Li-Cycle files for bankruptcy, Glencore may want Rochester Hub - Rochester Business Journal",neutral,-0.08949081599712372
+2025-07-03 07:00:00+00:00,VOD.L,Vodafone and Manna reach new heights with drone home delivery test - Vodafone,positive,0.8503667712211609
+2025-08-06 07:00:00+00:00,GLEN.L,Miner Glencore decides against moving stock market listing from London to US - The Guardian,neutral,-0.060731396079063416
+2025-08-21 07:00:00+00:00,RR.L,"Sweden's Vattenfall shortlists Rolls-Royce, GE Vernova to build SMR nuclear reactors - Reuters",neutral,0.0021031349897384644
+2025-09-02 07:00:00+00:00,VOD.L,Iraq launches 5G company with Vodafone partnership - Arabian Gulf Business Insight | AGBI,positive,0.5604557991027832
+2025-09-17 07:00:00+00:00,RR.L,This one-off Rolls-Royce has an exquisite interior - Auto Express,neutral,0.13410276174545288
+2025-10-01 07:00:00+00:00,GSK.L,Where are the female CEOs? GSK’s Walmsley latest to leave FTSE 100 - businesscloud.co.uk,neutral,-0.29568326473236084
+2025-10-21 07:00:00+00:00,BARC.L,Barclays (Q3 Results): good progress - Hargreaves Lansdown,positive,0.917442798614502
+2025-11-06 08:00:00+00:00,BA.L,Boom times in a British manufacturing town - The Economist,neutral,0.2252449244260788
+2025-11-07 08:00:00+00:00,ULVR.L,"Alcoa, Ball and Unilever Partner to Launch the First Use of - Ball",positive,0.5233380198478699
+2025-11-13 08:00:00+00:00,BA.L,"Prediction: in 12 months Babcock, BAE Systems shares and Rolls-Royce could turn £10,000 into… - twelfthmagpie.com",neutral,0.10519276559352875
+2025-12-03 08:00:00+00:00,NWG.L,"Town centre cashpoint raided using 'heavy machinery', police say - Rhyl Journal",negative,-0.9093772768974304
+2026-01-15 08:00:00+00:00,RR.L,Will Rolls-Royce’s share price surge or sink? 4 key things to consider - twelfthmagpie.com,neutral,0.0007589608430862427
+2026-01-21 08:00:00+00:00,RIO.L,Rio Tinto shares jump on strong production figures - UK Investor Magazine,positive,0.6460354328155518
+2026-04-13 07:00:00+00:00,GSK.L,GSK announces positive outcomes from Phase I BEHOLD-1 trial of Mo-Rez - Clinical Trials Arena,positive,0.9331579804420471
+2026-04-22 07:00:00+00:00,HSBA.L,The power of tokenisation - HSBC,neutral,0.05066676437854767
+2026-04-27 07:00:00+00:00,SHEL.L,Shell to buy Canadian shale producer ARC Resources for $16.4bn - The Guardian,neutral,0.10754236578941345
+2026-06-19 07:00:00+00:00,VOD.L,Vodafone ‘fully restores’ services after outage - The Australian,neutral,0.24000373482704163
+2026-06-21 18:00:00+00:00,AZN.L,AstraZeneca talks offer new hope of breast cancer drug on NHS - The Times,neutral,0.2826414108276367
+2026-06-29 12:18:03+00:00,AZN.L,AstraZeneca Stock And 2 UK Shares Where Cash Flow May Matter Most - simplywall.st,neutral,0.013534413650631905
+2026-06-29 15:13:28+00:00,SHEL.L,Shell’s Courtroom Circus: The Donovan Litigation Years - Royal Dutch Shell Plc .com,neutral,-0.020526323467493057
