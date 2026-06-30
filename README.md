@@ -20,6 +20,10 @@ py -3.12 -m venv .venv
 # Week 2: fetch recent news headlines -> data/raw/news.parquet  (PRIMARY sentiment source)
 .venv/Scripts/python.exe -m src.ingest.news
 
+# Week 2: historical news for the backtest (date-windowed Google News, resumable)
+#   -> data/raw/news_history.parquet
+.venv/Scripts/python.exe -m src.ingest.news_history
+
 # Optional: Reddit posts -> data/raw/reddit.parquet  (needs approved API creds in .env)
 .venv/Scripts/python.exe -m src.ingest.reddit
 ```
@@ -37,4 +41,4 @@ data/                # raw + processed data (git-ignored)
 ```
 
 ## Status
-🚧 In development — Week 2: data ingestion. Prices ✅ · news headlines ✅ (primary sentiment) · Reddit optional/deferred · historical sentiment dataset next.
+🚧 In development — Week 2: data ingestion. Prices ✅ · live news ✅ · historical news via date-windowed Google News ✅ (primary sentiment) · Reddit optional/deferred. Next: data cleaning + FinBERT sentiment scoring.
