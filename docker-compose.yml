@@ -1,0 +1,21 @@
+# Runs the API and the dashboard from the same image.
+# data/ and reports/ are gitignored, so they are mounted in from the host
+# (run the offline pipeline first to populate features.parquet + reports).
+services:
+  api:
+    build: .
+    command: uvicorn src.serve.api:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+
+  dashboard:
+    build: .
+    command: streamlit run src/serve/dashboard.py --server.port 8501 --server.address 0.0.0.0
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports

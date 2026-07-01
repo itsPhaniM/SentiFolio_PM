@@ -1,0 +1,11 @@
+# Slim runtime deps for the deployment (API + dashboard) — no torch/transformers,
+# which are only needed offline to (re)score sentiment. See requirements.txt for the full stack.
+pandas<3
+pyarrow
+numpy
+scipy
+scikit-learn
+lightgbm
+fastapi
+uvicorn[standard]
+streamlit
