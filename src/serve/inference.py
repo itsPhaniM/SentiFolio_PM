@@ -14,6 +14,7 @@ import sys
 from functools import lru_cache
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import lightgbm as lgb
 
@@ -56,6 +57,33 @@ def recommend_portfolio(arm: str = "price_only") -> dict:
     top["weight"] = round(1.0 / TOP_K, 4)
     return {"as_of": str(pd.Timestamp(as_of).date()), "arm": arm, "strategy": "top_ew",
             "n_holdings": TOP_K, "holdings": top[["ticker", "name", "pred", "weight"]].to_dict("records")}
+
+
+def portfolio_risk(arm: str = "price_only", lookback: int = 252) -> dict:
+    """Risk profile of the recommended top-K portfolio: annualised volatility and each
+    holding's share of that risk, plus the strategy's realised backtest risk metrics.
+    Risk contribution uses the trailing covariance: RC_i = w_i * (cov @ w)_i / variance."""
+    rec = recommend_portfolio(arm)
+    holds = [h["ticker"] for h in rec["holdings"]]
+    w = np.array([h["weight"] for h in rec["holdings"]], dtype=float)
+    close = (pd.read_parquet(PROCESSED_DIR / "features.parquet")
+             .pivot_table(index="date", columns="ticker", values="close").sort_index())
+    rets = close.pct_change(fill_method=None)[holds].dropna().tail(lookback)
+    cov = rets.cov().values * 252.0
+    port_var = float(w @ cov @ w)
+    port_vol = float(np.sqrt(max(port_var, 1e-12)))
+    rc = (w * (cov @ w)) / port_var if port_var > 0 else w      # fractional risk contribution
+    holdings = [{"ticker": t, "name": TICKERS.get(t, t), "weight": float(wi),
+                 "risk_contribution": float(r)} for t, wi, r in zip(holds, w, rc)]
+    bt = pd.read_csv(REPORT_DIR / "backtest_metrics.csv").set_index("strategy")
+    key = f"{rec['strategy']}[{arm}]"
+    realised = None
+    if key in bt.index:
+        row = bt.loc[key]
+        realised = {"Sharpe": float(row["Sharpe"]), "CAGR": float(row["CAGR"]),
+                    "vol": float(row["vol"]), "maxDD": float(row["maxDD"])}
+    return {"as_of": rec["as_of"], "arm": arm, "strategy": rec["strategy"],
+            "portfolio_vol_annual": port_vol, "holdings": holdings, "backtest_risk": realised}
 
 
 def shap_importances() -> dict:

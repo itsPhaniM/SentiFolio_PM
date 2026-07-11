@@ -19,7 +19,7 @@ def test_config_universe():
 def test_api_imports_and_routes():
     from src.serve.api import app
     paths = {r.path for r in app.routes}
-    assert {"/health", "/forecasts", "/portfolio", "/shap", "/backtest"} <= paths
+    assert {"/health", "/forecasts", "/portfolio", "/risk", "/shap", "/backtest"} <= paths
 
 
 def test_inference_arms():

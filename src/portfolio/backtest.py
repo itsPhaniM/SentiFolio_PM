@@ -12,6 +12,11 @@ Allocators
     top_mv         top-K names, max-Sharpe mean-variance weights (PyPortfolioOpt)
     top_rp         top-K names, inverse-volatility (risk-parity) weights
 
+Trading frictions are modelled explicitly and split into two parts, both charged on
+turnover at each rebalance: a broker COMMISSION and execution SLIPPAGE (the price you
+actually trade at vs the close you measured against). Survivorship bias is addressed
+separately by scripts/survivorship_check.py, and regime robustness by regime.py.
+
 Metrics: CAGR, annualised vol, Sharpe, Sortino, max drawdown, and the Deflated
 Sharpe Ratio (Bailey & Lopez de Prado 2014) which corrects the Sharpe for the
 number of strategy trials, non-normal returns and sample length.
@@ -38,7 +43,9 @@ sys.path.append(str(ROOT))
 from config import PROCESSED_DIR, ROOT as PROJECT_ROOT
 
 TOP_K = 5                     # hold the top third of the 15-name universe
-COST_BPS = 10                 # one-way transaction cost per unit turnover (10 bps)
+COMMISSION_BPS = 10           # broker commission per unit turnover, one way
+SLIPPAGE_BPS = 5              # execution slippage per unit turnover, one way
+COST_BPS = COMMISSION_BPS + SLIPPAGE_BPS   # total friction charged on turnover
 LOOKBACK = 252               # trading days of history for covariance / vol estimates
 TRADING_DAYS = 252
 MAX_WEIGHT = 0.40            # per-name cap for the mean-variance optimiser
@@ -156,8 +163,9 @@ def metrics(r: pd.Series) -> dict:
     return dict(CAGR=cagr, vol=vol, Sharpe=sharpe, Sortino=sortino, maxDD=max_drawdown(equity))
 
 
-def main() -> None:
-    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+def load_daily() -> tuple[dict[str, pd.Series], pd.DataFrame, pd.Timestamp]:
+    """Build every strategy's net daily-return series. Shared with regime.py so the
+    regime split uses the exact same, cost- and slippage-aware simulation."""
     sig = pd.read_parquet(PROCESSED_DIR / "signals.parquet")
     feat = pd.read_parquet(PROCESSED_DIR / "features.parquet")
 
@@ -165,11 +173,17 @@ def main() -> None:
     rets_full = close.pct_change(fill_method=None).fillna(0.0)
     tickers = list(close.columns)
     first_rebal = sig["date"].min()
-    cost_rate = COST_BPS / 10000.0
+    cost_rate = COST_BPS / 10000.0                             # commission + slippage
 
     schedules = build_schedules(sig, rets_full, tickers)       # trailing stats use full history
     rets = rets_full.loc[rets_full.index >= first_rebal]       # simulate from when signals begin
     daily = {name: simulate(sched, rets, tickers, cost_rate) for name, sched in schedules.items()}
+    return daily, rets, first_rebal
+
+
+def main() -> None:
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    daily, rets, first_rebal = load_daily()
 
     # Deflated Sharpe needs the spread of (daily) Sharpes across all trials
     sr_daily_all = [r.mean() / r.std(ddof=1) for r in daily.values()]
@@ -186,7 +200,8 @@ def main() -> None:
 
     pd.set_option("display.float_format", lambda v: f"{v:.4f}")
     print(f"\n=== Walk-forward backtest {first_rebal.date()} -> {rets.index.max().date()} "
-          f"| K={TOP_K}, cost={COST_BPS}bps/side, {n_trials} strategies ===")
+          f"| K={TOP_K}, cost={COMMISSION_BPS}+{SLIPPAGE_BPS}bps/side (commission+slippage), "
+          f"{n_trials} strategies ===")
     print(table.to_string())
     out_csv = REPORT_DIR / "backtest_metrics.csv"
     table.to_csv(out_csv)
@@ -206,7 +221,8 @@ def main() -> None:
         style = "--" if name in ("equal_weight", "buy_and_hold") else "-"
         lw = 2.2 if name in ("equal_weight", "buy_and_hold") else 1.4
         ax.plot((1 + r).cumprod(), label=name, linestyle=style, linewidth=lw)
-    ax.set_title(f"SentiFolio walk-forward equity curves ({COST_BPS}bps/side costs)")
+    ax.set_title(f"SentiFolio walk-forward equity curves "
+                 f"({COMMISSION_BPS}+{SLIPPAGE_BPS}bps/side commission+slippage)")
     ax.set_ylabel("growth of 1.0"); ax.set_xlabel("date")
     ax.legend(fontsize=7, ncol=2); ax.grid(alpha=0.3)
     fig.tight_layout()

@@ -25,8 +25,23 @@ st.sidebar.markdown(
 )
 
 rec = inference.recommend_portfolio(arm)
-st.subheader(f"Recommended portfolio — as of {rec['as_of']} ({rec['strategy']}, {rec['n_holdings']} holdings)")
+st.subheader(f"Portfolio signals — as of {rec['as_of']} ({rec['strategy']}, {rec['n_holdings']} holdings)")
 st.dataframe(pd.DataFrame(rec["holdings"]), use_container_width=True, hide_index=True)
+
+# ---- risk metrics ----
+st.subheader("Risk metrics")
+risk = inference.portfolio_risk(arm)
+bt = risk["backtest_risk"] or {}
+c1, c2, c3, c4 = st.columns(4)
+c1.metric("Portfolio volatility (ann.)", f"{risk['portfolio_vol_annual']:.1%}")
+c2.metric("Backtest Sharpe", f"{bt.get('Sharpe', float('nan')):.2f}")
+c3.metric("Backtest CAGR", f"{bt.get('CAGR', float('nan')):.1%}")
+c4.metric("Max drawdown", f"{bt.get('maxDD', float('nan')):.1%}")
+risk_df = pd.DataFrame(risk["holdings"])
+risk_df["weight"] = (risk_df["weight"] * 100).round(1).astype(str) + "%"
+risk_df["risk_contribution"] = (risk_df["risk_contribution"] * 100).round(1).astype(str) + "%"
+st.caption("Per-holding weight vs share of portfolio risk (trailing 1-year covariance):")
+st.dataframe(risk_df, use_container_width=True, hide_index=True)
 
 st.subheader(f"Return forecasts — {inference.HORIZON}-day horizon")
 st.dataframe(pd.DataFrame(inference.latest_forecasts(arm)["forecasts"]),

@@ -42,6 +42,13 @@ def portfolio(arm: Arm = "price_only") -> dict:
     return inference.recommend_portfolio(arm)
 
 
+@app.get("/risk")
+def risk(arm: Arm = "price_only") -> dict:
+    """Risk profile of the recommended portfolio: annualised volatility, per-holding
+    risk contributions, and the strategy's realised backtest risk metrics."""
+    return inference.portfolio_risk(arm)
+
+
 @app.get("/shap")
 def shap() -> dict:
     """Mean |SHAP| feature importances (which features drive the forecasts)."""
