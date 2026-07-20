@@ -118,7 +118,7 @@ scripts/                      # survivorship + aggregation robustness checks
 tests/test_smoke.py           # smoke tests
 Dockerfile, docker-compose.yml, .github/workflows/ci.yml
 data/                         # raw + processed data (git-ignored)
-reports/                      # generated figures and CSV summaries (git-ignored)
+reports/                      # generated figures and CSV summaries (version-controlled)
 ```
 
 ## Tech stack

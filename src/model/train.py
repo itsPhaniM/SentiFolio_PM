@@ -127,6 +127,25 @@ def main() -> None:
     imp.rename("mean_abs_shap").to_csv(out)
     print(f"\nSaved SHAP importances -> {out}")
 
+    # Plot the same importances here so the figure can never drift from the CSV
+    # (it previously had to be produced by hand, which is how the two fell out of step).
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    fig_dir = ROOT / "reports" / "week4"
+    fig_dir.mkdir(parents=True, exist_ok=True)
+    order = imp.sort_values()
+    colors = ["#d62728" if f in SENT else "#1f77b4" for f in order.index]
+    fig, ax = plt.subplots(figsize=(7.8, 4.6))
+    ax.barh(order.index, order.values, color=colors)
+    ax.set_xlabel("mean |SHAP|")
+    ax.set_title("SHAP feature importance (blue=technical, red=sentiment)")
+    fig.tight_layout()
+    fig_path = fig_dir / "shap_feature_importance.png"
+    fig.savefig(fig_path, dpi=130)
+    plt.close(fig)
+    print(f"Saved SHAP chart       -> {fig_path}")
+
 
 if __name__ == "__main__":
     main()
