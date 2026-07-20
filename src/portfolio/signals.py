@@ -24,22 +24,15 @@ import lightgbm as lgb
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.append(str(ROOT))
 from config import PROCESSED_DIR
-from src.model.train import TECH, SENT, daily_rank_ic
+# The horizon, model configuration and target builder are imported from src/model/train.py
+# so there is a single source of truth: the model explained by SHAP in train.py is the same
+# model that produces these signals. (They used to be duplicated here, which let the two
+# files drift apart.) Re-exported for src/serve/inference.py and scripts/.
+from src.model.train import (TECH, SENT, daily_rank_ic,
+                             HORIZON, CONFIG, COMMON, TRAIN_START, build_target)
 
-HORIZON = 20                 # trading-day forward-return horizon = rebalance frequency
-# best config found in the experiment: 20d horizon, 'reg_shallow' params
-CONFIG = dict(n_estimators=700, learning_rate=0.02, num_leaves=15, min_child_samples=150,
-              subsample=0.7, subsample_freq=1, colsample_bytree=0.7, reg_lambda=5.0)
-COMMON = dict(random_state=42, n_jobs=-1, verbose=-1)
 ARMS = {"price_only": TECH, "price+sentiment": TECH + SENT}
-TRAIN_START = "2020-01-01"   # sentiment era (fair ablation)
 INITIAL_TRAIN_DAYS = 252     # ~1 year warm-up before the first rebalance
-
-
-def build_target(df: pd.DataFrame, h: int) -> pd.DataFrame:
-    d = df.sort_values(["ticker", "date"]).copy()
-    d["tgt"] = d.groupby("ticker")["close"].transform(lambda s: s.shift(-h) / s - 1)
-    return d
 
 
 def main() -> None:

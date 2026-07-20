@@ -30,12 +30,26 @@ from config import PROCESSED_DIR
 
 TECH = ["ret_1d", "ma_gap_5", "ma_gap_20", "vol_20", "mom_10", "mom_20"]
 SENT = ["sent_mean", "sent_vol", "sent_disp", "sent_pos_ratio", "sent_mean_3d", "sent_mean_7d", "sent_vol_7d"]
-TARGET = "target_fwd_5d"
 ARMS = {"price_only": TECH, "price+sentiment": TECH + SENT}
+TARGET = "tgt"
 
-LGB_PARAMS = dict(n_estimators=400, learning_rate=0.03, num_leaves=31, min_child_samples=50,
-                  subsample=0.8, subsample_freq=1, colsample_bytree=0.8, reg_lambda=1.0,
-                  random_state=42, n_jobs=-1, verbose=-1)
+# The configuration chosen by src/model/experiment.py: a 20-day forward-return horizon with
+# the regularised ("reg_shallow") settings. These live here because train.py sits at the
+# bottom of the import graph; src/portfolio/signals.py imports them, so the model explained
+# by SHAP below is exactly the model that generates the trading signals.
+HORIZON = 20
+TRAIN_START = "2020-01-01"          # sentiment era only, so the ablation is like-for-like
+CONFIG = dict(n_estimators=700, learning_rate=0.02, num_leaves=15, min_child_samples=150,
+              subsample=0.7, subsample_freq=1, colsample_bytree=0.7, reg_lambda=5.0)
+COMMON = dict(random_state=42, n_jobs=-1, verbose=-1)
+LGB_PARAMS = {**CONFIG, **COMMON}
+
+
+def build_target(df: pd.DataFrame, h: int) -> pd.DataFrame:
+    """Attach `tgt`: the return over the next `h` trading days (strictly forward)."""
+    d = df.sort_values(["ticker", "date"]).copy()
+    d["tgt"] = d.groupby("ticker")["close"].transform(lambda s: s.shift(-h) / s - 1)
+    return d
 
 
 def daily_rank_ic(dates, y_true, y_pred) -> float:
@@ -48,9 +62,12 @@ def daily_rank_ic(dates, y_true, y_pred) -> float:
 
 def main() -> None:
     df = pd.read_parquet(PROCESSED_DIR / "features.parquet")
+    df = build_target(df, HORIZON)
     # fair ablation: only the period where sentiment exists, and a usable target
-    df = df[(df["date"] >= "2020-01-01") & df[TARGET].notna()].sort_values(["date", "ticker"]).reset_index(drop=True)
-    print(f"Modelling rows: {len(df):,} ({df['ticker'].nunique()} tickers, {df['date'].min().date()} -> {df['date'].max().date()})")
+    df = df[(df["date"] >= TRAIN_START) & df[TARGET].notna()].sort_values(["date", "ticker"]).reset_index(drop=True)
+    print(f"Modelling rows: {len(df):,} ({df['ticker'].nunique()} tickers, "
+          f"{df['date'].min().date()} -> {df['date'].max().date()}) "
+          f"| {HORIZON}-day horizon, regularised settings")
 
     dates = np.array(sorted(df["date"].unique()))
     tscv = TimeSeriesSplit(n_splits=5)
@@ -83,9 +100,16 @@ def main() -> None:
 
     ic_po = np.mean(results["price_only"]["ic"])
     ic_ps = np.mean(results["price+sentiment"]["ic"])
+    delta = ic_ps - ic_po
+    # Guard: a rank IC at or below zero means the arm ranks no better than chance, so
+    # comparing two such arms is meaningless -- report that instead of declaring a winner.
+    if max(ic_po, ic_ps) <= 0:
+        verdict = ("NEITHER arm ranks better than chance at this horizon (both rank ICs <= 0), "
+                   "so the comparison is not meaningful")
+    else:
+        verdict = f"sentiment {'adds' if delta > 0 else 'does NOT add'} value"
     print(f"\nAblation (RQ1): rank IC price-only = {ic_po:.4f} vs price+sentiment = {ic_ps:.4f} "
-          f"-> sentiment {'adds' if ic_ps > ic_po else 'does NOT add'} value "
-          f"(delta = {ic_ps - ic_po:+.4f})")
+          f"-> {verdict} (delta = {delta:+.4f})")
 
     # SHAP on the full price+sentiment model
     import shap
