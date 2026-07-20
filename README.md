@@ -15,7 +15,7 @@ Does news sentiment actually improve UK equity portfolios, or just add noise? Se
 The project is framed as a hypothesis test, and a well-checked "no" is a valid result.
 
 - **Q1 — No robust gain from sentiment.** In cross-validation and in the backtest, adding sentiment shifts Sharpe by only a few hundredths and in no consistent direction (≈ −0.05, +0.07, 0.00 across the three allocators).
-- **Q2 — Price features dominate.** The five most important SHAP features are all price-based (volatility, momentum, moving-average gaps); the strongest sentiment feature (3-day average sentiment) ranks only sixth.
+- **Q2 — Price features dominate, but sentiment is not ignored.** Volatility (`vol_20`) is by far the single strongest driver, ahead of the two momentum features; two smoothed sentiment features then rank fourth and fifth. Overall, price features carry about two-thirds of the model's SHAP attribution. Notably the model *does* lean on sentiment and still gains nothing from it — the signature of fitting noise.
 - **Q3 — Passive is hard to beat.** The best active book earns a higher return (~23% CAGR) but not a higher Sharpe: buy-and-hold and equal-weight sit at ~1.27 and ~1.26, against ~1.18 for the best active strategy.
 - **Regime nuance (the standout).** Splitting the walk-forward window by market volatility, sentiment clearly *helps* in high-volatility periods (≈ +0.24 to +0.44 Sharpe across allocators) but *hurts* in calm ones (≈ −0.22 to −0.73). The flat aggregate hides two opposite effects.
 
@@ -65,7 +65,7 @@ Run from the project root, in order. Each stage reads the previous stage's outpu
 .\.venv\Scripts\python.exe -m scripts.sentiment_agg_check  # is the null robust to aggregation scheme?
 ```
 
-The processed data and reports are git-ignored, so a fresh clone regenerates them by running the pipeline above.
+The `data/` directory is git-ignored, so a fresh clone regenerates it by running the pipeline above. Generated figures and CSV summaries under `reports/` are version-controlled.
 
 **Sentiment source:** news headlines are the primary source (consistent with the literature). A Reddit scraper (`src/ingest/reddit.py`) is included but optional — Reddit closed self-service API access in Nov 2025, so live social-media data is scoped as future work pending developer approval.
 
