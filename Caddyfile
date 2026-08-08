@@ -1,0 +1,32 @@
+# === CURRENT: HTTP on the server's IP (<your-domain> has no DNS record yet) ===
+# Reach the dashboard at  http://<SERVER_IP>
+:80 {
+	# API: strip the /api prefix and forward to the FastAPI container
+	handle /api/* {
+		uri strip_prefix /api
+		reverse_proxy api:8000
+	}
+	# Everything else: serve the built React single-page app
+	handle {
+		root * /srv
+		try_files {path} /index.html
+		file_server
+	}
+}
+
+# === LATER: automatic HTTPS ===
+# Once an A record for a domain you own points to <SERVER_IP>, replace the
+# ":80" site block above with the domain and Caddy will obtain a Let's Encrypt
+# certificate automatically (ports 80 and 443 must be open):
+#
+# <your-domain> {
+#     handle /api/* {
+#         uri strip_prefix /api
+#         reverse_proxy api:8000
+#     }
+#     handle {
+#         root * /srv
+#         try_files {path} /index.html
+#         file_server
+#     }
+# }
