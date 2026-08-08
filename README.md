@@ -71,17 +71,26 @@ The `data/` directory is git-ignored, so a fresh clone regenerates it by running
 
 ## Serving
 
-```powershell
-# Interactive dashboard (portfolio signals, risk panel, forecasts, SHAP, backtest)
-.\.venv\Scripts\python.exe -m streamlit run src\serve\dashboard.py
+The dashboard is a **React + TypeScript** single-page app (dark "terminal" theme) that
+consumes the FastAPI service. Run the two together:
 
-# REST API (docs at http://127.0.0.1:8000/docs)
+```powershell
+# 1. REST API (docs at http://127.0.0.1:8000/docs)
 .\.venv\Scripts\python.exe -m uvicorn src.serve.api:app --reload
+
+# 2. React dashboard (dev server on http://localhost:5173, proxies /api -> :8000)
+cd frontend
+npm install       # first time only
+npm run dev
 ```
 
-API endpoints: `/health`, `/forecasts`, `/portfolio`, `/risk`, `/shap`, `/backtest`.
+API endpoints: `/health`, `/forecasts`, `/portfolio`, `/risk`, `/shap`, `/backtest`, `/equity`, `/regime`.
 
-Containerised run:
+A legacy Streamlit dashboard (`src/serve/dashboard.py`) is kept as a lightweight,
+dependency-free fallback and can be run with
+`.\.venv\Scripts\python.exe -m streamlit run src\serve\dashboard.py`.
+
+Containerised run of the API:
 
 ```powershell
 docker compose up

@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Literal
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.append(str(ROOT))
@@ -22,6 +23,14 @@ app = FastAPI(
     version="1.0",
     description="Explainable, sentiment-aware FTSE portfolio recommendations "
                 "(LightGBM + SHAP, walk-forward backtested).",
+)
+
+# Allow the React dev server (Vite, default port 5173) to call the API from the browser.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
+    allow_methods=["GET"],
+    allow_headers=["*"],
 )
 
 
@@ -59,3 +68,16 @@ def shap() -> dict:
 def backtest() -> dict:
     """Saved walk-forward backtest metrics for every strategy."""
     return inference.backtest_metrics()
+
+
+@app.get("/equity")
+def equity() -> dict:
+    """Daily equity curves (growth of 1.0) for every strategy."""
+    return inference.equity_curves()
+
+
+@app.get("/regime")
+def regime() -> dict:
+    """Sharpe by market regime (high-volatility vs calm) and the sentiment ablation
+    delta in each regime — the project's standout finding."""
+    return inference.regime_summary()

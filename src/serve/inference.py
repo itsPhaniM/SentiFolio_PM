@@ -94,3 +94,31 @@ def shap_importances() -> dict:
 def backtest_metrics() -> dict:
     m = pd.read_csv(REPORT_DIR / "backtest_metrics.csv")
     return {"strategies": m.to_dict("records")}
+
+
+def equity_curves() -> dict:
+    """Daily walk-forward equity curves (growth of 1.0) for every strategy."""
+    e = pd.read_csv(REPORT_DIR / "equity_curves.csv")
+    strategies = [c for c in e.columns if c != "date"]
+    return {"strategies": strategies, "curves": e.to_dict("records")}
+
+
+def regime_summary() -> dict:
+    """Per-strategy Sharpe in high-volatility vs calm regimes, plus the sentiment
+    ablation delta in each regime (the project's standout finding)."""
+    r = pd.read_csv(REPORT_DIR / "regime_metrics.csv")
+    piv = r.pivot(index="strategy", columns="regime", values="Sharpe")
+    rows = [
+        {"strategy": s, "high_vol": float(piv.loc[s, "high_vol"]), "calm": float(piv.loc[s, "calm"])}
+        for s in piv.index
+    ]
+    deltas = []
+    for style in ("top_ew", "top_mv", "top_rp"):
+        po, ps = f"{style}[price_only]", f"{style}[price+sentiment]"
+        if po in piv.index and ps in piv.index:
+            deltas.append({
+                "allocator": style,
+                "high_vol": float(piv.loc[ps, "high_vol"] - piv.loc[po, "high_vol"]),
+                "calm": float(piv.loc[ps, "calm"] - piv.loc[po, "calm"]),
+            })
+    return {"strategies": rows, "sentiment_delta": deltas}

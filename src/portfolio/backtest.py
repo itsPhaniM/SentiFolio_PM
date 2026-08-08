@@ -227,8 +227,16 @@ def main() -> None:
     ax.legend(fontsize=7, ncol=2); ax.grid(alpha=0.3)
     fig.tight_layout()
     fig.savefig(REPORT_DIR / "equity_curves.png", dpi=130)
+
+    # also dump the daily equity curves as data, so the React dashboard can chart them natively
+    equity = pd.DataFrame({name: (1 + r).cumprod() for name, r in daily.items()})
+    equity.index.name = "date"
+    equity_csv = REPORT_DIR / "equity_curves.csv"
+    equity.round(4).to_csv(equity_csv)
+
     print(f"\nSaved metrics -> {out_csv}")
     print(f"Saved equity curves -> {REPORT_DIR / 'equity_curves.png'}")
+    print(f"Saved equity series -> {equity_csv}")
 
 
 if __name__ == "__main__":
