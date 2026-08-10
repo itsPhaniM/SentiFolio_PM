@@ -6,3 +6,10 @@ data/
 .ipynb_checkpoints/
 *.log
 .DS_Store
+
+# local FPR dataset/report snapshots (large, regenerable — keep out of the repo)
+*_snapshot_*/
+# deploy / data-update bundles (build artifacts)
+sentifolio-*.tar.gz
+# raw console-capture dumps
+reports/*_output.txt
