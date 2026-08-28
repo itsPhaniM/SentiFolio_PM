@@ -1,4 +1,4 @@
-"""Build the modelling table: technical indicators + daily sentiment features + target.
+"""Build the modelling table: technical indicators + daily sentiment features.
 
 Combines:
   - data/raw/prices.parquet                  (OHLCV per ticker)
@@ -7,10 +7,11 @@ into data/processed/features.parquet, one row per (ticker, trading day):
 
   Technical:  ret_1d, ma_gap_5, ma_gap_20, vol_20, mom_10, mom_20
   Sentiment:  sent_mean, sent_vol, sent_disp, sent_pos_ratio (+ 3d/7d rolling)
-  Target:     target_fwd_5d  (return over the next 5 trading days)
 
-Features are as-of the close of each trading day; the target is strictly forward
-(starts the next day), so there is no look-ahead leakage in the features.
+Features are as-of the close of each trading day, so there is no look-ahead
+leakage. The forecast target is deliberately NOT stored here: src/model/train.py
+builds it at train time from the single shared HORIZON, so the model explained by
+SHAP is exactly the model that generates the trading signals.
 
 Run:
     .venv/Scripts/python.exe -m src.features.build_features
@@ -26,8 +27,6 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.append(str(ROOT))
 from config import RAW_DIR, PROCESSED_DIR
 
-FWD_HORIZON = 5  # trading days for the forward-return target
-
 
 def technical_features(g: pd.DataFrame) -> pd.DataFrame:
     g = g.sort_values("date").copy()
@@ -38,8 +37,6 @@ def technical_features(g: pd.DataFrame) -> pd.DataFrame:
     g["vol_20"] = g["ret_1d"].rolling(20).std()
     g["mom_10"] = close / close.shift(10) - 1
     g["mom_20"] = close / close.shift(20) - 1
-    # forward target (strictly future)
-    g["target_fwd_5d"] = close.shift(-FWD_HORIZON) / close - 1
     return g
 
 
@@ -90,7 +87,6 @@ def main() -> None:
     print(f"Saved {len(feats):,} rows ({feats['ticker'].nunique()} tickers) -> {out_path}")
     print(f"date span: {feats['date'].min().date()} -> {feats['date'].max().date()}")
     print(f"feature columns: {feat_cols}")
-    print(f"rows with a usable target: {feats['target_fwd_5d'].notna().sum():,}")
     print(f"days with news coverage: {(feats['sent_vol'] > 0).mean():.1%} of ticker-days")
 
 

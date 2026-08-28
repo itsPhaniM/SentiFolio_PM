@@ -37,21 +37,32 @@ by_t = scored.groupby("ticker").agg(
 by_t.to_csv(OUT / "sentiment_by_ticker.csv")
 
 # ---- CSV 3: EDA correlations + quintiles ----
-d = feats[(feats["date"] >= "2020-01-01") & feats["target_fwd_5d"].notna()].copy()
+# Short-horizon forward return used for exploratory analysis only. It is computed
+# here rather than stored in features.parquet so that the feature table carries no
+# target at all: the modelling target is the 20-day horizon that src/model/train.py
+# builds at train time (see its HORIZON), which keeps a single source of truth.
+EDA_HORIZON = 5
+feats = feats.sort_values(["ticker", "date"]).copy()
+feats["eda_fwd_5d"] = feats.groupby("ticker")["close"].transform(
+    lambda s: s.shift(-EDA_HORIZON) / s - 1)
+
+d = feats[(feats["date"] >= "2020-01-01") & feats["eda_fwd_5d"].notna()].copy()
 fcols = ["sent_mean", "sent_mean_3d", "sent_mean_7d", "sent_vol", "sent_pos_ratio",
          "mom_10", "mom_20", "vol_20", "ma_gap_20"]
-corr = d[fcols + ["target_fwd_5d"]].corr()["target_fwd_5d"].drop("target_fwd_5d").round(4)
+corr = d[fcols + ["eda_fwd_5d"]].corr()["eda_fwd_5d"].drop("eda_fwd_5d").round(4)
 corr.rename("corr_with_fwd_5d_return").to_csv(OUT / "eda_feature_correlations.csv")
 
 d["sent_quintile"] = pd.qcut(d["sent_mean_7d"].rank(method="first"), 5,
                              labels=["Q1 most neg", "Q2", "Q3", "Q4", "Q5 most pos"])
-quint = (d.groupby("sent_quintile", observed=True)["target_fwd_5d"].mean() * 100).round(3)
+quint = (d.groupby("sent_quintile", observed=True)["eda_fwd_5d"].mean() * 100).round(3)
 quint.rename("mean_next5d_return_pct").to_csv(OUT / "eda_sentiment_quintiles.csv")
 
 # ---- Charts ----
-plt.figure(figsize=(5, 3.2))
+plt.figure(figsize=(6, 3.4))
 scored["sent_label"].value_counts().reindex(["positive", "neutral", "negative"]).plot.bar(color=["#2e7d32", "#9e9e9e", "#c62828"])
-plt.title("FinBERT sentiment label distribution (86k headlines)"); plt.ylabel("headlines"); plt.tight_layout()
+plt.title(f"FinBERT sentiment label distribution ({len(scored):,} headlines)", fontsize=10)
+plt.ylabel("headlines"); plt.xlabel("")
+plt.xticks(rotation=0); plt.tight_layout()
 plt.savefig(OUT / "sentiment_label_distribution.png", dpi=130); plt.close()
 
 plt.figure(figsize=(6, 3.6))
