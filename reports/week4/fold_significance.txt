@@ -1,0 +1,15 @@
+Paired comparison of per-fold rank IC, price+sentiment vs price-only
+20-day horizon, regularised configuration, five walk-forward folds
+
+mean difference : +0.00253
+std deviation   : 0.03900
+folds positive  : 4 of 5
+
+paired t-test      : t = +0.145,  p = 0.892
+Wilcoxon signed-rank: W = 5.0,  p = 0.625
+
+With five folds the test has very little power, so a non-significant
+result is not evidence of equivalence. It is reported because a
+difference that cannot be distinguished from zero on the metric that
+most favours sentiment is consistent with the cost-aware backtest,
+which is treated as the arbiter throughout.
