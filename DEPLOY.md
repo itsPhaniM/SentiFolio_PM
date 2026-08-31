@@ -67,6 +67,7 @@ cd /opt/sentifolio && docker compose -f docker-compose.prod.yml up -d --build
 
 ## Security note
 
-Use a strong root password — rotate it (`passwd`) and, ideally, switch
-SSH to key-based auth and set `PermitRootLogin prohibit-password` in
-`/etc/ssh/sshd_config` (then `systemctl restart ssh`).
+Deploy to a server you control and substitute your own values for `<SERVER_IP>`
+and `<SSH_PORT>`. Use key-based SSH rather than a root password, and set
+`PermitRootLogin prohibit-password` in `/etc/ssh/sshd_config` (then
+`systemctl restart ssh`).
